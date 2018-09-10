@@ -24,7 +24,7 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/Internal/DecoderData.h>
+#include "Zydis/Internal/DecoderData.h"
 
 /* ============================================================================================== */
 /* Data tables                                                                                    */
@@ -252,7 +252,7 @@ extern const ZydisDecoderTreeNode filtersMVEXE[][2];
 /* Physical instruction encodings                                                                 */
 /* ---------------------------------------------------------------------------------------------- */
 
-#include <Generated/InstructionEncodings.inc>
+#include "Generated/InstructionEncodings.inc"
 
 /* ---------------------------------------------------------------------------------------------- */
 /* Decoder tree                                                                                   */
@@ -265,7 +265,7 @@ extern const ZydisDecoderTreeNode filtersMVEXE[][2];
 #define ZYDIS_DEFINITION(encoding_id, id) \
     { ZYDIS_NODETYPE_DEFINITION_MASK | encoding_id, id }
 
-#include <Generated/DecoderTables.inc>
+#include "Generated/DecoderTables.inc"
 
 #undef ZYDIS_INVALID
 #undef ZYDIS_FILTER
@@ -376,8 +376,9 @@ const ZydisDecoderTreeNode* ZydisDecoderTreeGetChildNode(const ZydisDecoderTreeN
 void ZydisGetInstructionEncodingInfo(const ZydisDecoderTreeNode* node,
     const ZydisInstructionEncodingInfo** info)
 {
+	ZydisU8 class;
     ZYDIS_ASSERT(node->type & ZYDIS_NODETYPE_DEFINITION_MASK);
-    const ZydisU8 class = (node->type) & 0x7F;
+    class = (node->type) & 0x7F;
     ZYDIS_ASSERT(class < ZYDIS_ARRAY_SIZE(instructionEncodings));
     *info = &instructionEncodings[class];
 }

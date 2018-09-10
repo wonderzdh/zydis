@@ -32,8 +32,8 @@
 #ifndef ZYDIS_MNEMONIC_H
 #define ZYDIS_MNEMONIC_H
 
-#include <Zydis/CommonTypes.h>
-#include <Zydis/String.h>
+#include "Zydis/CommonTypes.h"
+#include "Zydis/String.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,7 +43,7 @@ extern "C" {
 /* Enums and types                                                                                */
 /* ============================================================================================== */
 
-#include <Zydis/Generated/EnumMnemonic.h>
+#include "Zydis/Generated/EnumMnemonic.h"
 
 /* ============================================================================================== */
 /* Exported functions                                                                             */

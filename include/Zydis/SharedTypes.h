@@ -32,7 +32,7 @@
 #ifndef ZYDIS_SHAREDTYPES_H
 #define ZYDIS_SHAREDTYPES_H
 
-#include <Zydis/CommonTypes.h>
+#include "Zydis/CommonTypes.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -209,7 +209,8 @@ enum ZydisOperandTypes
 /**
  * @brief   Defines the @c ZydisOperandEncoding datatype.
  */
-typedef ZydisU8 ZydisOperandEncoding;
+//typedef ZydisU8 ZydisOperandEncoding;
+typedef ZydisU16 ZydisOperandEncoding;
 
 /**
  * @brief   Values that represent operand-encodings.

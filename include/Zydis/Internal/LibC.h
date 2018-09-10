@@ -27,7 +27,8 @@
 #ifndef ZYDIS_INTERNAL_LIBC_H
 #define ZYDIS_INTERNAL_LIBC_H
 
-#include <Zydis/Defines.h>
+#include "Zydis/Defines.h"
+#include "zydis/CommonTypes.h"
 
 #ifndef ZYDIS_NO_LIBC
 
@@ -55,13 +56,18 @@
 ZYDIS_INLINE void* ZydisMemorySet(void* ptr, int value, ZydisUSize num)
 {
     ZydisU8 c = value & 0xff;
-    for (ZydisUSize i = 0; i < num; ++i) ((ZydisU8*)ptr)[i] = c;
+	ZydisUSize i;
+	for (i = 0; i < num; ++i)
+	{
+		((ZydisU8*)ptr)[i] = c;
+	}
     return ptr;
 }
 
 ZYDIS_INLINE void* ZydisMemoryCopy(void* dst, const void* src, ZydisUSize num)
 {
-    for (ZydisUSize i = 0; i < num; ++i)
+	ZydisUSize i;
+    for (i = 0; i < num; ++i)
     {
         ((ZydisU8*)dst)[i] = ((const ZydisU8*)src)[i];
     }

@@ -32,11 +32,11 @@
 #ifndef ZYDIS_INSTRUCTIONINFO_H
 #define ZYDIS_INSTRUCTIONINFO_H
 
-#include <Zydis/CommonTypes.h>
-#include <Zydis/MetaInfo.h>
-#include <Zydis/Mnemonic.h>
-#include <Zydis/Register.h>
-#include <Zydis/SharedTypes.h>
+#include "Zydis/CommonTypes.h"
+#include "Zydis/MetaInfo.h"
+#include "Zydis/Mnemonic.h"
+#include "Zydis/Register.h"
+#include "Zydis/SharedTypes.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -24,7 +24,7 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/String.h>
+#include "Zydis/String.h"
 
 /* ============================================================================================== */
 /* Constants                                                                                      */
@@ -183,11 +183,14 @@ ZydisStatus ZydisStringAppendHexU32(ZydisString* string, ZydisU32 value, ZydisU8
 
 ZydisStatus ZydisStringAppendDecU64(ZydisString* string, ZydisU64 value, ZydisU8 paddingLength)
 {
+	char temp[ZYDIS_MAXCHARS_DEC_64 + 1];
+	char *p = &temp[ZYDIS_MAXCHARS_DEC_64];
+	ZydisUSize offset = 0;
+	ZydisUSize n;
+
     ZYDIS_ASSERT(string);
     ZYDIS_ASSERT(string->buffer);
 
-    char temp[ZYDIS_MAXCHARS_DEC_64 + 1];
-    char *p = &temp[ZYDIS_MAXCHARS_DEC_64];
     while (value >= 100)
     {
         ZydisU64 const old = value;
@@ -198,14 +201,14 @@ ZydisStatus ZydisStringAppendDecU64(ZydisString* string, ZydisU64 value, ZydisU8
     p -= 2;
     ZydisMemoryCopy(p, &decimalLookup[value * 2], sizeof(ZydisU16));
 
-    const ZydisUSize n = &temp[ZYDIS_MAXCHARS_DEC_64] - p;
+    n = &temp[ZYDIS_MAXCHARS_DEC_64] - p;
     if ((string->capacity - string->length < (ZydisUSize)(n + 1)) ||
         (string->capacity - string->length < (ZydisUSize)(paddingLength + 1)))
     {
         return ZYDIS_STATUS_INSUFFICIENT_BUFFER_SIZE;
     }
 
-    ZydisUSize offset = 0;
+    
     if (n <= paddingLength)
     {
         offset = paddingLength - n + 1;
@@ -221,6 +224,12 @@ ZydisStatus ZydisStringAppendDecU64(ZydisString* string, ZydisU64 value, ZydisU8
 ZydisStatus ZydisStringAppendHexU64(ZydisString* string, ZydisU64 value, ZydisU8 paddingLength,
     ZydisBool uppercase, const ZydisString* prefix, const ZydisString* suffix)
 {
+	ZydisUSize remaining;
+	char* buffer;
+	ZydisU8 n = 0;
+	ZydisU8 c;
+	ZydisI8 i;
+
     ZYDIS_ASSERT(string);
     ZYDIS_ASSERT(string->buffer);
 
@@ -229,8 +238,8 @@ ZydisStatus ZydisStringAppendHexU64(ZydisString* string, ZydisU64 value, ZydisU8
         ZYDIS_CHECK(ZydisStringAppend(string, prefix));
     }
 
-    char* buffer = string->buffer + string->length;
-    const ZydisUSize remaining = string->capacity - string->length;
+    buffer = string->buffer + string->length;
+	remaining = string->capacity - string->length;
 
     if (remaining < (ZydisUSize)paddingLength)
     {
@@ -257,10 +266,9 @@ ZydisStatus ZydisStringAppendHexU64(ZydisString* string, ZydisU64 value, ZydisU8
         return ZYDIS_STATUS_SUCCESS;
     }
 
-    ZydisU8 n = 0;
-    const ZydisU8 c =
-        ((value & 0xFFFFFFFF00000000) ? ZYDIS_MAXCHARS_HEX_64 : ZYDIS_MAXCHARS_HEX_32);
-    for (ZydisI8 i = c - 1; i >= 0; --i)
+    
+    c = ((value & 0xFFFFFFFF00000000) ? ZYDIS_MAXCHARS_HEX_64 : ZYDIS_MAXCHARS_HEX_32);
+    for (i = c - 1; i >= 0; --i)
     {
         const ZydisU8 v = (value >> i * 4) & 0x0F;
         if (!n)
@@ -309,12 +317,13 @@ ZydisStatus ZydisStringAppendHexU64(ZydisString* string, ZydisU64 value, ZydisU8
 
 ZydisStatus ZydisStringInit(ZydisString* string, char* text)
 {
+	ZydisUSize length;
     if (!string || !text)
     {
         return ZYDIS_STATUS_INVALID_PARAMETER;
     }
 
-    const ZydisUSize length = ZydisStrLen(text);
+	length = ZydisStrLen(text);
     string->buffer   = text;
     string->length   = length;
     string->capacity = length;
@@ -364,9 +373,10 @@ ZydisStatus ZydisStringAppendEx(ZydisString* string, const ZydisString* text,
         break;
     case ZYDIS_LETTER_CASE_LOWER:
     {
+		ZydisUSize i;
         const signed char rebase = 'a' - 'A';
         char* c = string->buffer + string->length;
-        for (ZydisUSize i = 0; i < text->length; ++i)
+        for (i = 0; i < text->length; ++i)
         {
             if ((*c >= 'A') && (*c <= 'Z'))
             {
@@ -378,9 +388,10 @@ ZydisStatus ZydisStringAppendEx(ZydisString* string, const ZydisString* text,
     }
     case ZYDIS_LETTER_CASE_UPPER:
     {
+		ZydisUSize i;
         const signed char rebase = 'A' - 'a';
         char* c = string->buffer + string->length;
-        for (ZydisUSize i = 0; i < text->length; ++i)
+        for (i = 0; i < text->length; ++i)
         {
             if ((*c >= 'a') && (*c <= 'z'))
             {
@@ -417,12 +428,12 @@ ZydisStatus ZydisStringAppendExC(ZydisString* string, const char* text, ZydisLet
 ZydisStatus ZydisStringAppendStatic(ZydisString* string, const ZydisStaticString* text,
     ZydisLetterCase letterCase)
 {
+	ZydisString other;
     if (!text || !text->buffer)
     {
         return ZYDIS_STATUS_INVALID_PARAMETER;
     }
 
-    ZydisString other;
     other.buffer = (char*)text->buffer;
     other.length = text->length;
 
@@ -432,12 +443,12 @@ ZydisStatus ZydisStringAppendStatic(ZydisString* string, const ZydisStaticString
 ZydisStatus ZydisStringAppendExStatic(ZydisString* string, const ZydisStaticString* text,
     ZydisLetterCase letterCase)
 {
+	ZydisString other;
     if (!text || !text->buffer)
     {
         return ZYDIS_STATUS_INVALID_PARAMETER;
     }
 
-    ZydisString other;
     other.buffer = (char*)text->buffer;
     other.length = text->length;
 

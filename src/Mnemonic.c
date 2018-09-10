@@ -24,8 +24,8 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/Mnemonic.h>
-#include <Generated/EnumMnemonic.inc>
+#include "Zydis/Mnemonic.h"
+#include "Generated/EnumMnemonic.inc"
 
 /* ============================================================================================== */
 /* Exported functions                                                                             */

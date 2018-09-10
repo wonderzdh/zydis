@@ -32,7 +32,7 @@
 #ifndef ZYDIS_STATUS_H
 #define ZYDIS_STATUS_H
 
-#include <Zydis/CommonTypes.h>
+#include "Zydis/CommonTypes.h"
 
 #ifdef __cplusplus
 extern "C" {

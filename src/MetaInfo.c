@@ -24,15 +24,15 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/MetaInfo.h>
+#include "Zydis/MetaInfo.h"
 
 /* ============================================================================================== */
 /* Enum strings                                                                                   */
 /* ============================================================================================== */
 
-#include <Generated/EnumInstructionCategory.inc>
-#include <Generated/EnumISASet.inc>
-#include <Generated/EnumISAExt.inc>
+#include "Generated/EnumInstructionCategory.inc"
+#include "Generated/EnumISASet.inc"
+#include "Generated/EnumISAExt.inc"
 
 /* ============================================================================================== */
 /* Exported functions                                                                             */

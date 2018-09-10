@@ -24,13 +24,13 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/Register.h>
+#include "Zydis/Register.h"
 
 /* ============================================================================================== */
 /* Register strings                                                                               */
 /* ============================================================================================== */
 
-#include <Generated/EnumRegister.inc>
+#include "Generated/EnumRegister.inc"
 
 /* ============================================================================================== */
 /* Register-class mapping                                                                         */
@@ -93,7 +93,8 @@ ZydisRegister ZydisRegisterEncode(ZydisRegisterClass registerClass, ZydisU8 id)
 
 ZydisI16 ZydisRegisterGetId(ZydisRegister reg)
 {
-    for (unsigned i = 0; i < registerMapCount; ++i)
+	unsigned i;
+    for (i = 0; i < registerMapCount; ++i)
     {
         switch (registerMap[i].class)
         {
@@ -113,7 +114,8 @@ ZydisI16 ZydisRegisterGetId(ZydisRegister reg)
 
 ZydisRegisterClass ZydisRegisterGetClass(ZydisRegister reg)
 {
-    for (unsigned i = 0; i < registerMapCount; ++i)
+	unsigned i;
+    for (i = 0; i < registerMapCount; ++i)
     {
         if ((reg >= registerMap[i].lo) && (reg <= registerMap[i].hi))
         {
@@ -125,6 +127,7 @@ ZydisRegisterClass ZydisRegisterGetClass(ZydisRegister reg)
 
 ZydisRegisterWidth ZydisRegisterGetWidth(ZydisRegister reg)
 {
+	unsigned i;
     // Special cases
     switch (reg)
     {
@@ -142,7 +145,7 @@ ZydisRegisterWidth ZydisRegisterGetWidth(ZydisRegister reg)
     }
 
     // Register classes
-    for (unsigned i = 0; i < registerMapCount; ++i)
+    for (i = 0; i < registerMapCount; ++i)
     {
         if ((reg >= registerMap[i].lo) && (reg <= registerMap[i].hi))
         {
@@ -154,6 +157,7 @@ ZydisRegisterWidth ZydisRegisterGetWidth(ZydisRegister reg)
 
 ZydisRegisterWidth ZydisRegisterGetWidth64(ZydisRegister reg)
 {
+	unsigned i;
     // Special cases
     switch (reg)
     {
@@ -171,7 +175,7 @@ ZydisRegisterWidth ZydisRegisterGetWidth64(ZydisRegister reg)
     }
 
     // Register classes
-    for (unsigned i = 0; i < registerMapCount; ++i)
+    for (i = 0; i < registerMapCount; ++i)
     {
         if ((reg >= registerMap[i].lo) && (reg <= registerMap[i].hi))
         {

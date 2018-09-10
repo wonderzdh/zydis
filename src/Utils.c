@@ -24,7 +24,7 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/Utils.h>
+#include "Zydis/Utils.h"
 
 /* ============================================================================================== */
 /* Address calculation                                                                            */
@@ -123,12 +123,13 @@ ZydisStatus ZydisCalcAbsoluteAddress(const ZydisDecodedInstruction* instruction,
 ZydisStatus ZydisGetAccessedFlagsByAction(const ZydisDecodedInstruction* instruction,
     ZydisCPUFlagAction action, ZydisCPUFlagMask* flags)
 {
+	ZydisU8 i;
     if (!instruction)
     {
         return ZYDIS_STATUS_INVALID_PARAMETER;
     }
     *flags = 0;
-    for (ZydisU8 i = 0; i < ZYDIS_ARRAY_SIZE(instruction->accessedFlags); ++i)
+    for (i = 0; i < ZYDIS_ARRAY_SIZE(instruction->accessedFlags); ++i)
     {
         if (instruction->accessedFlags[i].action == action)
         {

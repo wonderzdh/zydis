@@ -27,9 +27,9 @@
 #ifndef ZYDIS_STRING_H
 #define ZYDIS_STRING_H
 
-#include <Zydis/CommonTypes.h>
-#include <Zydis/Status.h>
-#include <Zydis/Internal/LibC.h>
+#include "Zydis/CommonTypes.h"
+#include "Zydis/Status.h"
+#include "Zydis/Internal/LibC.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -32,7 +32,7 @@
 #ifndef ZYDIS_COMMONTYPES_H
 #define ZYDIS_COMMONTYPES_H
 
-#include <Zydis/Defines.h>
+#include "Zydis/Defines.h"
 
 /* ============================================================================================== */
 /* Integer types                                                                                  */

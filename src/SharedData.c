@@ -24,7 +24,7 @@
 
 ***************************************************************************************************/
 
-#include <Zydis/Internal/SharedData.h>
+#include "Zydis/Internal/SharedData.h"
 
 /* ============================================================================================== */
 /* Data tables                                                                                    */
@@ -79,7 +79,7 @@ extern const ZydisInstructionDefinitionMVEX instructionDefinitionsMVEX[];
 /* Instruction definitions                                                                        */
 /* ---------------------------------------------------------------------------------------------- */
 
-#include <Generated/InstructionDefinitions.inc>
+#include "Generated/InstructionDefinitions.inc"
 
 /* ---------------------------------------------------------------------------------------------- */
 /* Operand definitions                                                                            */
@@ -88,7 +88,8 @@ extern const ZydisInstructionDefinitionMVEX instructionDefinitionsMVEX[];
 #define ZYDIS_OPERAND_DEFINITION(type, encoding, access) \
     { type, encoding, access }
 
-#include <Generated/OperandDefinitions.inc>
+//#include "Generated/OperandDefinitions.inc"
+#include "Generated/NewOperandDefinitions.inc"
 
 #undef ZYDIS_OPERAND_DEFINITION
 
@@ -96,7 +97,7 @@ extern const ZydisInstructionDefinitionMVEX instructionDefinitionsMVEX[];
 /* Accessed CPU flags                                                                             */
 /* ---------------------------------------------------------------------------------------------- */
 
-#include <Generated/AccessedFlags.inc>
+#include "Generated/AccessedFlags.inc"
 
 /* ---------------------------------------------------------------------------------------------- */
 

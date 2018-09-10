@@ -32,9 +32,9 @@
 #ifndef ZYDIS_UTILS_H
 #define ZYDIS_UTILS_H
 
-#include <Zydis/Defines.h>
-#include <Zydis/Status.h>
-#include <Zydis/DecoderTypes.h>
+#include "Zydis/Defines.h"
+#include "Zydis/Status.h"
+#include "Zydis/DecoderTypes.h"
 
 #ifdef __cplusplus
 extern "C" {

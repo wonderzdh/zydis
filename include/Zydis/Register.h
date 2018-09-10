@@ -32,9 +32,9 @@
 #ifndef ZYDIS_REGISTER_H
 #define ZYDIS_REGISTER_H
 
-#include <Zydis/Defines.h>
-#include <Zydis/CommonTypes.h>
-#include <Zydis/String.h>
+#include "Zydis/Defines.h"
+#include "Zydis/CommonTypes.h"
+#include "Zydis/String.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,7 +48,7 @@ extern "C" {
 /* Registers                                                                                      */
 /* ---------------------------------------------------------------------------------------------- */
 
-#include <Zydis/Generated/EnumRegister.h>
+#include "Zydis/Generated/EnumRegister.h"
 
 /* ---------------------------------------------------------------------------------------------- */
 /* Register classes                                                                               */
