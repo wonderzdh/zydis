@@ -1,6 +1,9 @@
 C98 support.
 
+1:
+Move variable is defined in the first line
 
+2:
 union initialization:
 detail:
 https://en.cppreference.com/w/c/language/struct_initialization
