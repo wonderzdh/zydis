@@ -141,7 +141,10 @@ typedef struct ZydisOperandDefinition_
     ZydisInternalElementType elementType    ZYDIS_BITFIELD(5);
     union
     {
-        ZydisOperandEncoding encoding;
+		//这么改是为了兼容C98只能初始化union第一个成员的语法
+		//第一个成员 2 字节就可以覆盖后面的所有成员
+        //ZydisOperandEncoding encoding;
+		ZydisU16 encoding;
         struct
         {
             ZydisU8 type                    ZYDIS_BITFIELD(3);
